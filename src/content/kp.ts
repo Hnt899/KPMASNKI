@@ -15,6 +15,12 @@ export const KP_NAV: KpNavItem[] = [
 
 export const KP = {
   title: 'Коммерческое предложение',
+  links: {
+    // Google Docs (source of truth). Used for "Получить КП в PDF"
+    gdoc:
+      'https://docs.google.com/document/d/1ImpaG-avD5lV2faUCz6htELfuWrdh4jjpYdIO3s0iHQ/edit?usp=sharing',
+    gdocPdf: 'https://docs.google.com/document/d/1ImpaG-avD5lV2faUCz6htELfuWrdh4jjpYdIO3s0iHQ/export?format=pdf',
+  },
   hero: {
     headline: 'B2B платформа грузоперевозок: заказчик ↔ перевозчик ↔ водитель',
     subheadline: 'Контроль сделки + документы + деньги в одном месте',

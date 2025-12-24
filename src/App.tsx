@@ -17,7 +17,6 @@ import {
   Calendar,
   AlertCircle,
 } from 'lucide-react'
-import { useState } from 'react'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
@@ -28,22 +27,24 @@ import { Card, FeatureGrid } from './components/FeatureGrid'
 import { Stepper, Timeline } from './components/Timeline'
 import { Button } from './components/ui/Button'
 import { Badge } from './components/ui/Badge'
-import { CallModal } from './components/CallModal'
 import { useToast } from './components/toast'
 import { KP, KP_NAV } from './content/kp'
 
 function App() {
-  const [callOpen, setCallOpen] = useState(false)
   const toast = useToast()
 
   const paymentBadge = KP.payments.needsSyncLabel
 
   function handlePdf() {
-    window.print()
+    // Prefer the authoritative Google Doc PDF export
+    window.open(KP.links.gdocPdf, '_blank', 'noopener,noreferrer')
   }
 
   function handleCall() {
-    setCallOpen(true)
+    const phone = '+7 985 365 6294'
+    const message = encodeURIComponent(`Заявка на созвон.\nТелефон: ${phone}`)
+    window.open(`https://t.me/CDI_Agency?text=${message}`, '_blank', 'noopener,noreferrer')
+    toast.push('Открываю Telegram…')
   }
 
   return (
@@ -456,16 +457,6 @@ function App() {
       </main>
 
       <Footer geo={KP.footer.geo} contactNote={KP.footer.contactNote} />
-
-      <CallModal
-        open={callOpen}
-        onClose={() => setCallOpen(false)}
-        onSubmit={(payload) => {
-          // имитация отправки
-          console.log('[CALL_REQUEST]', payload)
-          toast.push('Заявка отправлена')
-        }}
-      />
 
       <PrintLayout />
     </div>
